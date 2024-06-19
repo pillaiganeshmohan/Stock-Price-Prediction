@@ -1,0 +1,8 @@
+wheel
+pandas
+matplotlib
+plotly
+scikit-learn
+tensorflow
+flask
+kaleido

@@ -1,0 +1,75 @@
+<html>    
+    <head>
+        <link rel="stylesheet" type="text/css" href="\Static\Style.css">  
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        
+        <title>Nifty 50</title>
+    </head>
+    <body> 
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <div class = "header">
+            <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
+            <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
+            <a href="{{ url_for('tcs') }}" class="w3-bar-item w3-button" onclick="show()">TCS</a>
+        </br>
+            <a href="{{ url_for('infosys') }}" class="w3-bar-item w3-button" onclick="show()">Infosys</a>
+        </br>    
+            <a href="{{ url_for('google') }}"  class="w3-bar-item w3-button" onclick="show()">Google</a>
+        </br>
+            <a href="{{ url_for('nifty') }}" class="w3-bar-item w3-button" onclick="show()">Nifty 50</a>
+        </div>    
+        <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
+            <h1>Nifty Stock details and Price Prediction
+            </h1>
+        </div>
+        <div class = "page">
+            
+                <script>
+                    function show() {
+         
+                        /* Access image by id and change
+                        the display property to block*/
+                        document.getElementById('page')
+                                .style.display = "none";
+                        document.getElementById('header')
+                                .style.display = "none";  
+                        document.body.style.backgroundColor = "black";       
+                        document.getElementById('image')
+                            .style.display = "block";
+         
+                    
+                }
+                function w3_open() {
+                                document.getElementById("mySidebar").style.display = "block";
+                        }
+
+                        function w3_close() {   
+                                document.getElementById("mySidebar").style.display = "none";
+                        }       
+            </script>
+            
+            
+            <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+            <div class = "info">
+                <p>Company Name: <b>Top 50 Companies of NSE</b></p>
+                <h5>Company Essentials:</h5>
+                <p>MARKET CAP:<b>₹ 6,25,872.40 Cr.</b> </p>
+                <p>ENTERPRISE VALUE: <b>₹ 6,13,602.40 Cr.</b></p>
+                <p>NO. OF SHARES:<b>420.78 Cr.</b> </p>
+                <p>P/E RATIO: <b>28.19</b></p>
+                <p>P/B RATIO: <b>9.5</b></p>
+                <p>FACE VALUE: <b>₹ 50</b></p>
+            </div>
+            <div class = "chart3">
+                <img src="{{url_for('static', filename='actual_vs_pred3.svg')}}" width = 500 height = 300>    
+            </div>
+        
+        
+        
+            <div class = "footer"></div>
+        </div>
+      <!--filename  = "path of your image in in static folder"-->
+    </body>  
+</html>

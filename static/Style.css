@@ -1,0 +1,141 @@
+*{
+    margin: 0px;
+    background-color: black;
+}
+.button{
+background-color: #7217d4;
+position: relative;
+width: 90px;
+padding: 10px;   
+height: fit-content;
+text-align: center;
+color: white
+
+}
+.sidebar{
+    background-color: rgb(15, 14, 14);
+    float: left;
+    height: auto;
+    width: fit-content;
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 58px;
+    flex: 0.25;
+}
+.main_body{
+    background-color: rgb(249, 245, 245);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    flex: 0.25;
+}
+.page{
+    display: flex;
+    margin: 0;
+    padding: 20px;
+    background-color: rgb(241, 241, 242);
+    float: left;
+    width: 1550px;
+}
+.chart3{
+    float:right;
+    padding-top: 10px;
+    padding-left:50px;
+    padding-right:50px;
+}
+#image{
+
+    align-items: center;
+    padding-left:  540px;
+    padding-top: 200px;
+}
+.header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    color: rgb(241, 241, 241)   
+}
+.container{
+    padding: 10px;
+}
+.info{
+    height: fit-content;
+    width: 900px;
+    float: left;
+    padding: 20px;
+    color: white;
+    align-content: center;
+    
+}
+.info1{
+    padding: 20px;
+    width: 900px;
+    float: left;
+    color: white;
+    font-size: 24px;
+    padding-bottom: 20px; 
+}
+.w3-sidebar{
+    height:100%;
+    width:150px;
+    background-color:black;
+    position:fixed!important;
+    z-index:1;
+    overflow:auto;
+    font-size:24px;
+    float: left;
+    align-items: center;
+    padding-top: 100px;
+
+}
+.w3-bar-block .w3-dropdown-hover,.w3-bar-block .w3-dropdown-click{width:100%}
+.w3-bar .w3-bar-item{
+    padding:8px 16px;
+    float:left;
+    width:auto;
+    border:none;
+    display:block;
+    outline:0
+}
+.w3-border-left{border-left:1px solid #ccc!important}
+.w3-border-right{border-right:1px solid #ccc!important}
+.w3-large{font-size:18px!important}
+.w3-button{
+    border:none;
+    display:inline-block;
+    padding:8px 16px;
+    vertical-align:middle;
+    overflow:hidden;
+    text-decoration:none;
+    color:White;background-color:black;
+    text-align:center;
+    cursor:pointer;
+    white-space:nowrap;
+    float: left;
+
+}
+
+.w3-teal,.w3-hover-teal:hover{
+   color:#fff!important;
+    background-color:black!important}    
+.w3-xlarge{font-size:24px!important}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #fff;
+    color: white;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  
