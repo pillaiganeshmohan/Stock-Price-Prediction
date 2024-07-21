@@ -118,10 +118,19 @@ def tcs():
     day_new = day_new.tolist()
     day_pred = day_pred.tolist()
     fig = px.line(x=day_pred, y=y_pred)
-    fig.add_trace(go.Scatter(x = day_new, y = y_new, mode = 'lines'))
-    fig.update_xaxes(title="No. of Days")
-    fig.update_yaxes(title="Stock price")
-    fig.write_image("Static\\actual_vs_pred2.svg",width = 500, height = 300)
+    fig.add_trace(go.Scatter(x=day_new, y=y_new, mode='lines', line=dict(color='black'), name='Actual'))
+    fig.add_trace(go.Scatter(x=day_pred, y=y_pred, mode='lines', line=dict(color='gray'), name='Prediction'))
+    fig.update_layout(plot_bgcolor='#E2E3E6',
+                      title='<b><b>Prediction Graph</b></b>',
+                      font=dict(family="Arial", size=16 , color="black"),
+                      title_x=0.05,
+                      title_y=0.9,
+                      xaxis_title="No. of Days",
+                      yaxis_title="Stock Price",
+                      paper_bgcolor='#E2E3E6')
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.write_image("Static\\actual_vs_pred2.svg",width = 640, height = 300)
 
 
     return render_template('tcs.html',title = "tcs")
@@ -209,10 +218,19 @@ def infosys():
     day_new = day_new.tolist()
     day_pred = day_pred.tolist()
     fig = px.line(x=day_pred, y=y_pred)
-    fig.add_trace(go.Scatter(x = day_new, y = y_new, mode = 'lines'))
-    fig.update_xaxes(title="No. of Days")
-    fig.update_yaxes(title="Stock price")
-    fig.write_image("Static\\actual_vs_pred.svg",width = 500, height = 300)
+    fig.add_trace(go.Scatter(x=day_new, y=y_new, mode='lines', line=dict(color='black'), name='Actual'))
+    fig.add_trace(go.Scatter(x=day_pred, y=y_pred, mode='lines', line=dict(color='gray'), name='Prediction'))
+    fig.update_layout(plot_bgcolor='#E2E3E6',
+                      title='<b><b>Prediction Graph</b></b>',
+                      font=dict(family="Arial", size=16 , color="black"),
+                      title_x=0.05,
+                      title_y=0.9,
+                      xaxis_title="No. of Days",
+                      yaxis_title="Stock Price",
+                      paper_bgcolor='#E2E3E6')
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.write_image("Static\\actual_vs_pred.svg",width = 640, height = 300)
 
     return render_template('infosys.html',title = "infosys")
     
@@ -301,10 +319,20 @@ def google():
     day_new = day_new.tolist()
     day_pred = day_pred.tolist()
     fig = px.line(x=day_pred, y=y_pred)
-    fig.add_trace(go.Scatter(x = day_new, y = y_new, mode = 'lines'))
-    fig.update_xaxes(title="No. of Days")
-    fig.update_yaxes(title="Stock price")
-    fig.write_image("Static\\actual_vs_pred4.svg",width = 500, height = 300)
+    fig.add_trace(go.Scatter(x=day_new, y=y_new, mode='lines', line=dict(color='black'), name='Actual'))
+    fig.add_trace(go.Scatter(x=day_pred, y=y_pred, mode='lines', line=dict(color='gray'), name='Prediction'))
+    fig.update_layout(plot_bgcolor='#E2E3E6',
+                      title='<b><b>Prediction Graph</b></b>',
+                      font=dict(family="Arial", size=16 , color="black"),
+                      title_x=0.05,
+                      title_y=0.9,
+                      xaxis_title="No. of Days",
+                      yaxis_title="Stock Price",
+                      paper_bgcolor='#E2E3E6')
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.write_image("Static\\actual_vs_pred4.svg",width = 640, height = 300)
+
 
 
     return render_template('google.html',title = "google")
@@ -393,10 +421,19 @@ def nifty():
     day_new = day_new.tolist()
     day_pred = day_pred.tolist()
     fig = px.line(x=day_pred, y=y_pred)
-    fig.add_trace(go.Scatter(x = day_new, y = y_new, mode = 'lines'))
-    fig.update_xaxes(title="No. of Days")
-    fig.update_yaxes(title="Stock price")
-    fig.write_image("Static\\actual_vs_pred3.svg",width = 500, height = 300)
+    fig.add_trace(go.Scatter(x=day_new, y=y_new, mode='lines', line=dict(color='black'), name='Actual'))
+    fig.add_trace(go.Scatter(x=day_pred, y=y_pred, mode='lines', line=dict(color='gray'), name='Prediction'))
+    fig.update_layout(plot_bgcolor='#E2E3E6',
+                      title='<b><b>Prediction Graph</b></b>',
+                      font=dict(family="Arial", size=16 , color="black"),
+                      title_x=0.05,
+                      title_y=0.9,
+                      xaxis_title="No. of Days",
+                      yaxis_title="Stock Price",
+                      paper_bgcolor='#E2E3E6')
+    fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+    fig.write_image("Static\\actual_vs_pred3.svg",width = 640, height = 300)
 
     return render_template('nifty.html',title = "nifty")
 

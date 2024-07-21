@@ -1,94 +1,348 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <style> 
-    #image{
-        display: none;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Price Prediction</title>
+    <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='logo.png')}}">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        #image {
+            display: none;
         }
+
+        .container input:checked ~ .checkmark {
+            background-color: #000;
+        }
+
+        /* Hide the default checkbox */
+        .container input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        /* Custom checkbox */
+        .checkmark {
+            position: relative;
+            height: 25px;
+            width: 25px;
+            background-color: #eee;
+            border-radius: 4px;
+        }
+
+        /* When the checkbox is checked, add a black background */
+        .container input:checked ~ .checkmark {
+            background-color: #000;
+        }
+
+        /* Create the checkmark/indicator (hidden when not checked) */
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        /* Show the checkmark when checked */
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        /* Style the checkmark/indicator */
+        .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 7px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px; 
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 40%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Loader Styles */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            color: #fff;
+            font-size: 24px;
+            font-weight: bold;
+            display: none; /* Hidden by default */
+        }
+
+        .loading-wave {
+  width: 300px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.loading-bar {
+  width: 20px;
+  height: 20px;
+  margin: 0 5px;
+  background-color: #A8A29E;
+  border-radius: 5px;
+  animation: loading-wave-animation 1s ease-in-out infinite;
+}
+
+.loading-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.loading-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.loading-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@keyframes loading-wave-animation {
+  0% {
+    height: 20px;
+  }
+
+  50% {
+    height: 80px;
+  }
+
+  100% {
+    height: 20px;
+  }
+}
+
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
-   
-    <!-- <link rel="stylesheet" type="text/css" href="\Static\Style.css">   -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <title> 
-        Stock Price Prediction		
-    </title>
 </head>
- <body>
-    
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<body style="background-color: #a8a29e;">
 
-    <div class="w-full flex bg-black text-orange-300" id = "header">
-        <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
-            <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-            <a href="{{ url_for('tcs') }}" class="w3-bar-item w3-button" onclick="show()">TCS</a>
-        </br>
-            <a href="{{ url_for('infosys') }}" class="w3-bar-item w3-button" onclick="show()">Infosys</a>
-        </br>    
-            <a href="{{ url_for('google') }}"  class="w3-bar-item w3-button" onclick="show()">Google</a>
-        </br>
-            <a href="{{ url_for('nifty') }}" class="w3-bar-item w3-button" onclick="show()">Nifty 50</a>
-        </div>    
-        <button class="w3-button w3-teal w3-xlarge" onclick="w3_open()">☰</button>
-        <h1 class="w-full flex items-center justify-center">Stock Price Prediction
-        </h1>
+    <div class="flex text-black px-4 py-2 items-center justify-center" id="header">
+        <img src="{{url_for('static', filename='logo.png')}}" class='sm:ml-8  h-20 w-20 ml-10 sm:h-auto '/>
+
+        <h1 class="flex-1 text-3xl font-bold ml-5">Stock Price Prediction</h1>
     </div>
-    <div class = ""  id="page">
-        
-            
-                
-                <div class="se-pre-con"></div>
-                 <script>
-                    function show() {
-         
-         /* Access image by id and change
-         the display property to block*/
-         document.getElementById('page')
-                 .style.display = "none";
-         document.getElementById('header')
-                 .style.display = "none";  
-         document.body.style.backgroundColor = "black";       
-         document.getElementById('image')
-             .style.display = "block";
 
-           
- }
-                            function w3_open() {
-                                document.getElementById("mySidebar").style.display = "block";
-                        }
+    <div id="page" class="bg-gray-100 h-[100vh]">
+        <div class="se-pre-con"></div>
+        <script>
+            function show() {
+                document.getElementById('page').style.display = "none";
+                document.getElementById('header').style.display = "none";
+                document.body.style.backgroundColor = "black";
+                document.getElementById('image').style.display = "block";
+            }
+            function w3_open() {
+                document.getElementById("mySidebar").classList.remove("hidden");
+            }
+            function w3_close() {
+                document.getElementById("mySidebar").classList.add("hidden");
+            }
+        </script>
 
-                        function w3_close() {   
-                                document.getElementById("mySidebar").style.display = "none";
-                        }   
-                          
-                
-                
-             </script>
-            
-            
-
-           <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-           <div class = "info1">
-            <h4><b>Introduction </b></h4>
-            <p>Financial markets are highly volatile and generate huge amounts of data daily.
-                It is the most popular financial market instrument and its value changes quickly.
-                Stock prices are predicted to determine the future value of companies’ stock or other financial instruments that are marketed on financial exchanges.
-                However, the stock market is influenced by many factors such as political events, economic conditions and traders’ expectations. 
+        <div class="flex w-full justify-between p-4 font-sans">
+            <div class="w-full lg:w-1/2 p-8 flex flex-col gap-8">
+                <h2 class="text-5xl"><b>Welcome to Stock Vision : 
+                    Your Ultimate Stock Price Prediction Tool</b></h2>
+                <p class="text-justify text-2xl leading-relaxed">
+                    Financial markets are highly volatile and generate huge amounts of data daily.
+                    It is the most popular financial market instrument and its value changes quickly.
+                    Stock prices are predicted to determine the future value of companies’ stock or other financial instruments that are marketed on financial exchanges.
+                    However, the stock market is influenced by many factors such as political events, economic conditions and traders’ expectations.
                 </p>
+                <button class="rounded-lg w-1/4 text-xl bg-black hover:bg-gray-700 text-white p-2" onclick="openModal()">Get Started</button>   
             </div>
-        <div id = "chart3">
-            
-                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3RvY2t8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60" width = 600 height = 300 class="chart3">    
-        </div>  
-    
+            <div id="chart3" class="w-full lg:w-1/2 flex items-end justify-center">
+                <img src="{{url_for('static', filename='STOCKS.png')}}" class="w-4/5 h-auto">
+            </div>
+        </div>
+     
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content rounded-xl border-2 border-black">
+                <div class="w-full flex flex-col gap-10 ">
+                    <div class="w-full text-2xl font-bold text-center">Select the Company's Stock</div>
+                    <div class="w-full flex items-center justify-evenly">
+                        <label class="container flex items-center justify-center">
+                            <input type="checkbox" name="stock" value="TCS"/>
+                            <span class="checkmark"></span>
+                            <label class="text-xl ml-2">TCS</label>
+                        </label>
+                        <label class="container flex items-center justify-center">
+                            <input type="checkbox" name="stock" value="Google"/>
+                            <span class="checkmark"></span>
+                            <label class="text-xl ml-2">Google</label>
+                        </label>
+                        <label class="container flex items-center justify-center">
+                            <input type="checkbox" name="stock" value="Infosys"/>
+                            <span class="checkmark"></span>
+                            <label class="text-xl ml-2">Infosys</label>
+                        </label>
+                        <label class="container flex items-center justify-center">
+                            <input type="checkbox" name="stock" value="NIFTY"/>
+                            <span class="checkmark"></span>
+                            <label class="text-xl ml-2">NIFTY</label>
+                        </label>
+                    </div>
+                    <div class="w-full flex items-center justify-center">
+                        <button class="bg-black text-white text-lg font-semibold w-1/4 p-2 rounded-xl" onclick="viewStock()">View</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Footer -->
+        <div class=' flex flex-col w-full items-center justify-center text-black' style="background-color: #a8a29e;">
+            <div class=' p-4 mt-4 sm:px-0 flex sm:flex-col' style="width: 94%;">
+                <div class='flex sm:w-full sm:mr-2 sm:flex-row flex-col w-1/2 justify-between items-start sm:ml-0 ml-10 sm:items-center '>
+                    <img src="{{url_for('static', filename='logo.png')}}" class=' ml-4 sm:ml-0  h-28 w-28 sm:h-auto '/>
+                    <div class="w-1/2 items-end flex justify-end">
+                        <div class="w-fit flex flex-col items-start justify-end gap-2">
+                          <div class="text-xl font-bold  mb-2">Contact Us</div>
+                          <div class="w-fit flex items-end justify-end gap-5">
+  
+                            <img src="{{url_for('static', filename='Email.png')}}"/>
+                            <img src="{{url_for('static', filename='LinkedIn.png')}}"/>
+                            <img src="{{url_for('static', filename='Phone.png')}}"/>
+                            <img src="{{url_for('static', filename='TwitterX.png')}}"/>
+                        </div>
+                      </div>
+                    </div>
+                    
+                </div>
+            <hr class="border-[1px] border-white my-2 w-full"/>
+            <p class='text-black text-sm p-2 text-center'>Copyright © 2024 Stock Vision | All rights reserved </p>   
+        </div>
+    </div>
+
+    <div id="image" class="hidden fixed inset-0 z-50 bg-black w-full h-[100vh] bg-opacity-75 flex items-center justify-center">
+        <img src="https://cdn.dribbble.com/users/172906/screenshots/1672303/2014-08-05_23_14_21.gif" alt="Loading" class="">
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader flex flex-col">
+        <div class="loading-wave">
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+            <div class="loading-bar"></div>
+          </div>
+          <div>Loading...</div>
+        </div>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <script>
         
         
-        <div class = "footer"></div>
-    <img src="https://cdn.dribbble.com/users/172906/screenshots/1672303/2014-08-05_23_14_21.gif" alt="Loading" id="image">
+
+        function openModal() {
+
+            document.getElementById("myModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            checkbox.addEventListener('change', function() {
+                document.querySelectorAll('input[type="checkbox"]').forEach((cb) => {
+                    if (cb !== checkbox) {
+                        cb.checked = false;
+                    }
+                });
+            });
+        });
+
+        function viewStock() {
+            const selectedCheckbox = document.querySelector('input[type="checkbox"]:checked');
+            if (selectedCheckbox) {
+                const stock = selectedCheckbox.value;
+                let url;
+                switch (stock) {
+                    case 'TCS':
+                        url = '/tcs';
+                        break;
+                    case 'Google':
+                        url = '/google';
+                        break;
+                    case 'Infosys':
+                        url = '/infosys';
+                        break;
+                    case 'NIFTY':
+                        url = '/nifty';
+                        break;
+                    default:
+                        url = '#';
+                }
+                document.getElementById('loader').style.display = 'flex';
+                window.location.href = url;
+                
+            } else {
+                alert('Please select a company.');
+            }
+        }
+
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.display = 'none';
+        });
+    </script>
 </body>
 </html>
