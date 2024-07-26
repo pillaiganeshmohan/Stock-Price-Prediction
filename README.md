@@ -21,8 +21,14 @@ http://127.0.0.1:5000/
 
 ## Screenshots
 
+![1](https://github.com/user-attachments/assets/4af5f394-00e2-42b1-baf3-24a73a518c5d)
 
+![2](https://github.com/user-attachments/assets/43b4c3c1-9c55-48ae-900a-d2c9366b62e0)
+
+![3](https://github.com/user-attachments/assets/ca39ba4b-db07-4598-9ebd-eb96c08314c1)
 
 ## Contributing
 If you would like to contribute to this project, please fork the repository and submit a pull request.
 
+## License
+This project is licensed under the **BSD 3-Clause "New" or "Revised" License**. See the [LICENSE](./LICENSE) file for details.
